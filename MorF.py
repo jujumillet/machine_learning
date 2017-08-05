@@ -7,6 +7,14 @@ import csv
 #[height, weight, shoe size]
 # On charge le dataset
 
+print ("************************************************************")
+print ("Bienvenue sur le premier test de machine learning")
+print ("************************************************************")
+
+taille = input("Veuillez saisir la taille en centimètres : ")
+poids = input("Veuillez saisir le poids en kilo : ")
+pointure = input("Veuillez saisir la pointure : ")
+
 data = pd.read_csv('test.csv', sep=";")
 data = pd.DataFrame(data)
 
@@ -28,8 +36,9 @@ clf = tree.DecisionTreeClassifier()
 clf = clf.fit(maliste, data.sexe)
 
 #prédiction des nouvelles valeurs
-prediction = clf.predict([[155, 60, 39]])
+prediction = clf.predict([[taille, poids, pointure]])
 
 #affichage du résultat prédit
+print ("La personne en question est donc probablement : ")
 print (prediction)
 
