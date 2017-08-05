@@ -1,51 +1,35 @@
 from sklearn import tree
+import numpy as np
+import pandas as pd
+import csv
+
 
 #[height, weight, shoe size]
-X = [
-	[181, 80, 44],
-	[177, 70, 43],
-	[160, 60, 38],
-	[154, 54, 37],
-	[166, 65, 40],
-	[190, 90, 47],
-	[175, 64, 39],
-	[177, 70, 40],
-	[159, 55, 37],
-	[171, 75, 42],
-	[181, 85, 43],
-	[173, 75, 43],
-	[176, 62, 42],
-	[156, 62, 37],
-	[163, 55, 39],
-	[180, 72, 43],
-	[187, 98, 45]
-	]
+# On charge le dataset
 
-Y = [
-	 'male',
-     'male', 
-     'female', 
-     'female', 
-     'male', 
-     'male', 
-     'female', 
-     'female',
-     'female', 
-     'male', 
-     'male', 
-     'male', 
-     'male', 
-     'female', 
-     'female', 
-     'male', 
-     'male'
-     ]
+data = pd.read_csv('test.csv', sep=";")
+data = pd.DataFrame(data)
 
 
-clf = tree.DecisionTreeClassifier()
+#récuperer le nombre de ligne du dataset
+n = len(data) 
+#création d'une liste qu'on va remplir (mensuration)
+maliste = list() 
 
-clf = clf.fit(X,Y)
+#remplissage de la liste crée précedemment
+for row in range(n): 
+	liste_mensuration = np.array([data.taille[row], data.poids[row] , data.shoe_size[row]])
+	maliste.append(liste_mensuration)
 
-prediction = clf.predict([[187, 98, 45]])
+#création de l'objet arbre de décision
+clf = tree.DecisionTreeClassifier() 
 
+#lecture des data pour l'apprentissage
+clf = clf.fit(maliste, data.sexe)
+
+#prédiction des nouvelles valeurs
+prediction = clf.predict([[155, 60, 39]])
+
+#affichage du résultat prédit
 print (prediction)
+
