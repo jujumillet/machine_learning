@@ -1,2 +1,3 @@
 # machine_learning
-First commit
+
+Learning works on machine learning 
